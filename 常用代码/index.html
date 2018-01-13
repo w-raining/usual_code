@@ -6,6 +6,86 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>常用代码</title>
+
+
+    <!--百度统计-->
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e45b0f8ae062ff00683523fd9a4e09dc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+    <!--微信  QQ分享-->
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+    <script type="text/javascript">
+        //qq分享 cc123
+        setShareInfo({
+            title:  {!! json_encode($js_sdk[0]['title']) !!},
+        summary: {!! json_encode($js_sdk[0]['summary']) !!},
+        pic:'{{$js_sdk[0]['pic']}}',
+            url: '{{$js_sdk[1]['url']}}',
+            WXconfig: {
+            swapTitleInWX: true,
+                appId: '{{$js_sdk[1]['appId']}}',
+                timestamp: '{{$js_sdk[1]['timestamp']}}',
+                nonceStr: '{{$js_sdk[1]['nonceStr']}}',
+                signature: '{{$js_sdk[1]['signature']}}'
+        }
+        });
+
+    </script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '{{$js_sdk[1]['appId']}}',
+            timestamp: '{{$js_sdk[1]['timestamp']}}', // 必填，生成签名的时间戳
+            nonceStr: '{{$js_sdk[1]['nonceStr']}}', // 必填，生成签名的随机串
+            signature: '{{$js_sdk[1]['signature']}}',// 必填，签名，见附录1
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: {!! json_encode($js_sdk[0]['title']) !!},
+        link: '{{$js_sdk[1]['url']}}',
+            imgUrl: '{{$js_sdk[0]['pic']}}'
+        });
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: {!! json_encode($js_sdk[0]['title']) !!},
+        desc: {!! json_encode($js_sdk[0]['summary']) !!},
+        link: '{{$js_sdk[1]['url']}}',
+            imgUrl: '{{$js_sdk[0]['pic']}}',
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+        });
+        //分享到QQ
+        wx.onMenuShareQQ({
+            title: {!! json_encode($js_sdk[0]['title']) !!},
+        desc: {!! json_encode($js_sdk[0]['summary']) !!},
+        link: '{{$js_sdk[1]['url']}}',
+            imgUrl: '{{$js_sdk[0]['pic']}}'
+        });
+        //分享到腾讯微博
+        wx.onMenuShareWeibo({
+            title: {!! json_encode($js_sdk[0]['title']) !!},
+        desc: {!! json_encode($js_sdk[0]['summary']) !!},
+        link: '{{$js_sdk[1]['url']}}',
+            imgUrl: '{{$js_sdk[0]['pic']}}'
+        });
+        //分享到QQ空间
+        wx.onMenuShareQZone({
+            title: {!! json_encode($js_sdk[0]['title']) !!},
+        desc: {!! json_encode($js_sdk[0]['summary']) !!},
+        link: '{{$js_sdk[1]['url']}}',
+            imgUrl: '{{$js_sdk[0]['pic']}}'
+        });
+    </script>
 </head>
 <style type="text/css">
     /*rem布局  */
@@ -89,15 +169,45 @@
         display: none;
     }
 
+    /*input框的字体颜色变化*/
+    input::-webkit-input-placeholder {font-size: .3rem;color: #A8A8A8;}
+    input:-moz-placeholder {font-size: .3rem;color: #A8A8A8;}
+    input:-ms-input-placeholder {font-size: .3rem;color: #A8A8A8;}
 
+
+    /*vertical-align属性详解*/
+    /*作用于 子元素  middle：中部对齐  baseline:基线对齐*/
+    .chuizhi{font-size: 14px;}
+    .chuizhi span{vertical-align: middle;vertical-align: bottom;vertical-align: baseline;vertical-align: top;vertical-align:text-top;}
+    .chuizhi a{vertical-align: middle;}
+    img{vertical-align: middle;  width: 200px;  height: 80px;}
+
+    /*内核的兼容性写法*/
+    .a{
+        transform: scale(.7,.8);
+        -ms-transform:scale(.7,.8);  /* IE 9*/
+        -moz-transform: scale(.7,.8);  /* Firefox*/
+        -webkit-transform: scale(.7,.8); /* Safari & Chrome*/
+        -o-transform: scale(.7,.8);  /* Opera */
+    }
+
+    /*苹果手机 点击会出现闪黑屏的情况*/
+    .tab-title, .tab-title > ul, .tab-title > ul > li, .bg-eee{
+        -webkit-tap-highlight-color: rgba(200, 200, 200, 0);
+        -webkit-user-select: none;
+        -webkit-transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+    }
 </style>
 <body>
-<div class="a"></div>
+<div class="chuizhi">
+    <span>444</span>
+    <a href="#">哈哈</a>
+    <img src="../11.jpg" alt="">
+</div>
 </body>
 <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-    //常用插件
-    //          弹框：dialog  layer
-    //          
+
 </script>
 </html>
